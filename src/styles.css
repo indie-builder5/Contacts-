@@ -899,6 +899,16 @@ footer {
   margin: 0 10px;
   color: #c7cfc5;
 }
+.footer-info {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  white-space: nowrap;
+}
+.footer-info > .text-button {
+  padding-left: 22px;
+  border-left: 1px solid var(--border);
+}
 .footer-creator {
   display: flex;
   align-items: center;
@@ -1520,18 +1530,28 @@ footer {
     justify-content: center;
     gap: 14px 20px;
   }
-  footer > span:first-child {
+  .footer-info {
     flex-basis: 100%;
-    text-align: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .footer-info .footer-divider {
+    margin: 0 6px;
+  }
+  .footer-info > .text-button {
+    padding-left: 10px;
+    font-size: 8px;
+    gap: 4px;
+  }
+  .footer-info > .text-button svg {
+    width: 11px;
+    height: 11px;
   }
   .footer-creator {
     flex-basis: 100%;
     justify-content: center;
     gap: 14px;
     font-size: 10px;
-  }
-  footer > .text-button {
-    order: 1;
   }
   .social-links a {
     width: 36px;

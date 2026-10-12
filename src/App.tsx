@@ -868,12 +868,14 @@ export default function App() {
         </section>
       </main>
       <footer>
-        <span>
-          Contacts− <span className="footer-divider">/</span> Less clutter. More connection.
-        </span>
-        <button className="text-button muted" onClick={() => setModal('help')}>
-          Privacy & Android import <ArrowUpRight size={13} />
-        </button>
+        <div className="footer-info">
+          <span>
+            Contacts− <span className="footer-divider">/</span> Less clutter. More connection.
+          </span>
+          <button className="text-button muted" onClick={() => setModal('help')}>
+            Privacy & Android import <ArrowUpRight size={13} />
+          </button>
+        </div>
         <div className="footer-creator">
           <span className="footer-credit" aria-label="Made with love in India">
             Made with <Heart size={12} aria-hidden="true" /> in India
