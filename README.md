@@ -33,7 +33,7 @@ npm ci
 npm run dev
 ```
 
-The clone command assumes you have created and pushed that GitHub repository. Until then, run the last two commands in this local project folder. Open the local URL printed by Vite, usually `http://localhost:5173`.
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
 To test on an Android phone on the **same Wi-Fi**:
 
