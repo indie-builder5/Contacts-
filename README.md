@@ -92,19 +92,6 @@ npm run preview
 
 The deployable static site is in `dist/`. Serve it over HTTP(S), not by double-clicking `index.html`, because imports use a module worker.
 
-### Publish the source to GitHub
-
-Git is initialized on `main`. Local commit identity is `paritoshpky5 <ashokkyadav200@gmail.com>`.
-
-Create an empty GitHub repository named **Contacts-** under `paritoshpky5`, without adding a README or license, then run:
-
-```sh
-git remote add origin https://github.com/paritoshpky5/Contacts-.git
-git push -u origin main
-```
-
-If you already have an `origin`, use `git remote set-url origin ...` instead. No remote repository or public deployment is created by the local build.
-
 ### Vercel deployment
 
 The included [vercel.json](vercel.json) configures the Vite build, install command, output directory and security headers. `package.json` selects Node 24.x.
@@ -126,7 +113,7 @@ The included [vercel.json](vercel.json) configures the Vite build, install comma
 
 No application secrets, database or backend are required. Keep Vercel Web Analytics and Speed Insights disabled to preserve this project's no-tracking design. `.vercel/` is ignored so local Vercel project metadata is not committed.
 
-After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Vercel URL. The deployment configuration is prepared here; no Vercel project or deployment has been created from this workspace.
+After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Vercel URL.
 
 References: [Vercel's Vite guide](https://vercel.com/docs/frameworks/frontend/vite), [project configuration](https://vercel.com/docs/project-configuration/vercel-json), [Node version selection](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions).
 
