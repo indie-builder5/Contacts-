@@ -1,0 +1,68 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Aarav Mehta
+N:Mehta;Aarav;;;
+TEL;TYPE=CELL:+91 90000 00001
+EMAIL;TYPE=HOME:aarav@example.com
+ORG:Paper & Pine
+TITLE:Designer
+NOTE:Fictional sample contact. Not a real person.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:अनन्या शर्मा
+N:शर्मा;अनन्या;;;
+item1.TEL:+91 90000 00002
+item1.X-ABLabel:Personal
+TEL;TYPE=WORK:+91 90000 00012
+EMAIL:ananya@example.com
+ORG:Studio Sunday
+TITLE:Architect
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Dev Kapoor
+N:Kapoor;Dev;;;
+TEL;TYPE=CELL:+91 90000 00003
+EMAIL:dev@example.com
+ORG:Northstar
+TITLE:Engineer
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Dev Kapoor (old)
+TEL;TYPE=CELL:+91 90000 00003
+EMAIL:dev.old@example.com
+NOTE:Sample duplicate candidate. Review independently.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Isha Rao
+N:Rao;Isha;;;
+EMAIL:isha@example.com
+ORG:Open Book
+TITLE:Writer
+NOTE:Coffee\, conversations\, and good books.\nFictional sample.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Kabir Sethi
+TEL;TYPE=HOME:+91 90000 00006
+ORG:Weekend Club
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Meera Joshi
+TEL;TYPE=CELL:+91 90000 00007
+EMAIL:meera@example.com
+TITLE:Product manager
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Noor Ali
+TEL;TYPE=CELL:+91 90000 00008
+EMAIL:noor@example.com
+ORG:Small Hours
+TITLE:Photographer
+URL:https://example.com
+END:VCARD
