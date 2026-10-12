@@ -64,7 +64,7 @@ To support returning later, it saves the imported records, filename, import warn
 
 Storage can be unavailable or full, particularly in private browsing. Watch the save indicator; if saving fails, export before closing. Saved progress is not a substitute for your original backup. See [PRIVACY.md](PRIVACY.md) for details.
 
-A static hosting provider can receive normal website access metadata. Production security headers are included for hosts supporting `_headers`; GitHub Pages does not apply that file. The application itself does not make contact upload requests.
+A static hosting provider can receive normal website access metadata. Production security headers are included in `render.yaml` for Render and in `_headers` for hosts supporting that file. GitHub Pages does not apply `_headers`. The application itself does not make contact upload requests.
 
 ## Validation
 
@@ -105,7 +105,31 @@ git push -u origin main
 
 If you already have an `origin`, use `git remote set-url origin ...` instead. No remote repository or public deployment is created by the local build.
 
-### GitHub Pages
+### Render (preferred deployment)
+
+Deploy this project as a **Static Site** on Render. The included [render.yaml](render.yaml) provides the build settings and security headers; `.node-version` pins the build to the locally tested Node 24.14.0.
+
+1. Push the repository to GitHub.
+2. In Render, choose **New → Blueprint**, connect your repository and use `render.yaml` from `main`.
+3. Review and create the `contacts-minus` static site. It builds with `npm ci --include=dev && npm run build` and publishes `dist/`.
+4. Open the actual `onrender.com` URL Render assigns after deployment. Use that URL in your LinkedIn and Product Hunt copy.
+
+Alternatively, choose **New → Static Site** and enter these values manually:
+
+| Setting           | Value                                   |
+| ----------------- | --------------------------------------- |
+| Branch            | `main`                                  |
+| Root directory    | Leave blank                             |
+| Build command     | `npm ci --include=dev && npm run build` |
+| Publish directory | `dist`                                  |
+
+Manual creation does not apply Blueprint headers automatically; copy the header rules from `render.yaml` into Render's Headers settings. No application secrets, database, start command or rewrite are needed. The Blueprint waits for linked-branch CI checks to pass before automatic redeploys. Keep the included Validate workflow enabled, or change Render's auto-deploy setting to On Commit or Off if desired.
+
+After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Render URL. Render setup is prepared here, but no Render service has been created or deployment performed.
+
+References: [Render static sites](https://render.com/docs/static-sites), [Blueprint fields](https://render.com/docs/blueprint-spec), [Node version selection](https://render.com/docs/node-version).
+
+### GitHub Pages (optional alternative)
 
 In **Settings → Pages → Build and deployment**, select **GitHub Actions**. Run the included **Deploy GitHub Pages** workflow manually from the Actions tab. It validates, builds, uploads `dist/` and deploys the site. Subsequent deployment is manual so ordinary source pushes don't unexpectedly publish changes. The anticipated project URL is `https://paritoshpky5.github.io/Contacts-/`; use it in launch copy only after a successful deployment.
 
@@ -132,6 +156,8 @@ e2e/                          Production-browser workflow tests
 public/                       Fictional sample files, favicon, host headers
 docs/                         Launch copy and generated screenshots
 .github/workflows/            CI and manual GitHub Pages deployment
+render.yaml                  Render Static Site Blueprint and security headers
+.node-version                Node version used for hosted builds
 ```
 
 ## Format support and limitations
