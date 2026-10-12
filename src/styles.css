@@ -899,6 +899,51 @@ footer {
   margin: 0 10px;
   color: #c7cfc5;
 }
+.footer-creator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.footer-credit svg {
+  color: #bb716b;
+  fill: currentColor;
+}
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+.social-links svg {
+  width: 16px;
+  height: 16px;
+}
+.social-links a:hover {
+  color: var(--green);
+  background: var(--soft);
+}
+.social-links .chai-link {
+  color: var(--green);
+  background: var(--soft);
+}
 .message {
   padding: 11px 14px;
   border: 1px solid var(--border);
@@ -1472,9 +1517,25 @@ footer {
     flex-wrap: wrap;
     margin-top: 17px;
     font-size: 8px;
+    justify-content: center;
+    gap: 14px 20px;
   }
-  footer > span:last-child {
-    display: none;
+  footer > span:first-child {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .footer-creator {
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 14px;
+    font-size: 10px;
+  }
+  footer > .text-button {
+    order: 1;
+  }
+  .social-links a {
+    width: 36px;
+    height: 36px;
   }
   .modal {
     padding: 22px;

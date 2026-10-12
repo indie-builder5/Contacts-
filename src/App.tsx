@@ -26,6 +26,7 @@ import type { Contact, ContactFilter, ImportResult, SortOrder } from './types/co
 import { duplicateCandidates, filterContacts, updateSelection } from './features/contacts/logic';
 import { exportVcard, parseVcard, propertyParts } from './lib/vcard';
 import { Modal } from './components/Modal';
+import { SocialLinks } from './components/SocialLinks';
 import { clearSession, loadSession, saveSession } from './lib/session';
 import demo from '../public/sample-contacts.vcf?raw';
 
@@ -873,7 +874,12 @@ export default function App() {
         <button className="text-button muted" onClick={() => setModal('help')}>
           Privacy & Android import <ArrowUpRight size={13} />
         </button>
-        <span>Built for a fresh start.</span>
+        <div className="footer-creator">
+          <span className="footer-credit" aria-label="Made with love in India">
+            Made with <Heart size={12} aria-hidden="true" /> in India
+          </span>
+          <SocialLinks />
+        </div>
       </footer>
       {modal === 'help' && (
         <Modal title="A fresh start, in three steps" close={close}>
