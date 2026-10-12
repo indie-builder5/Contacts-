@@ -1,162 +1,63 @@
 # Contacts−
 
-**Keep the people who matter.** A privacy-first contact manager for a fresh start on your next phone.
+[![Contacts− — Less clutter. More connection.](docs/readme/hero.svg)](https://contacts-minus.vercel.app/)
 
-![Contacts- desktop preview using fictional contacts](docs/contacts-desktop.png)
+[![Try Contacts−](docs/readme/try-contacts.svg)](https://contacts-minus.vercel.app/)
 
-## Why I built this
+**Turn a crowded contact backup into a list of people you actually want to keep.**
 
-I bought a new phone and realized I had **1,000+ contacts**, but I rarely connect with more than **100 people**. I didn't want years of clutter to follow me onto a new device. I wanted to go through my own backup, choose the people I actually want to keep, and bring just those contacts along.
+Import your contacts, choose your people, and download a fresh list. Free to use, with no account and no contact uploads.
 
-Contacts− is that small, intentional tool. **You decide who stays.** It never accesses, edits or deletes contacts directly on your phone.
+![Contacts− in action with fictional contacts](docs/contacts-desktop.png)
 
-## What you can do
+[See the mobile preview →](docs/contacts-android-layout.png)
 
-- Import `.vcf`, `.vcard`, or Google Contacts-style `.csv` backups.
-- Search names, numbers, emails, companies and job titles; sort and filter your list.
-- Select individual contacts, the current page, all matching results, or the entire list. Hidden selections stay intact.
-- Inspect details and review duplicate candidates independently. Nothing is merged automatically.
-- Undo your most recent selection change, or clear selections without removing the imported list.
-- Return after a refresh: imports and selections automatically save **in your current browser**. **Save progress** confirms that the latest state has been written.
-- Preview and download only selected contacts as an Android-importable VCF, with a custom filename.
-- Use **Clear uploaded contacts** to remove the list, selections and saved progress after confirmation.
-- Use a responsive interface with light/dark mode and keyboard-accessible dialogs.
+## Why I built it
 
-## Run locally
+I bought a new phone and realized I had **1,000+ contacts**, but I rarely connect with more than **100 people**. I wanted a fresh start without carrying years of clutter onto my new phone.
 
-Use Node.js **24 LTS** and npm. `.node-version` records the version used for local validation; `package.json` selects Node 24.x for hosted builds.
+Contacts− came from that moment. It gives you a quiet space to go through your backup, choose who stays, and bring only your people along.
 
-```sh
-git clone https://github.com/paritoshpky5/Contacts-.git
-cd Contacts-
-npm ci
-npm run dev
-```
+## Built for a fresh start
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+|                        | What you can do                                                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Bring your backup**  | Import VCF, vCard or Google Contacts-style CSV files, up to 50 MB.                                                                  |
+| **Find your people**   | Search names, numbers, emails and companies. Filter and sort your list.                                                             |
+| **Choose who stays**   | Select one contact, a page, or all matching results. Keep your selections across searches and pages.                                |
+| **Take your time**     | Imports and selections save automatically in your browser. Refresh or return later; **Save progress** confirms your latest choices. |
+| **Review the details** | Inspect contacts and duplicate candidates. Undo your last selection change.                                                         |
+| **Take them with you** | Preview your selected contacts and download a VCF for your phone's Contacts app.                                                    |
+| **Stay in control**    | Clear selections while keeping the list, or clear uploaded contacts and their saved progress.                                       |
 
-To test on an Android phone on the **same Wi-Fi**:
-
-```sh
-npm run dev -- --host 0.0.0.0
-```
-
-Open the Network URL printed by Vite on the phone, such as `http://192.168.1.8:5173`. If it cannot connect, allow Node through the Windows firewall on your private network. Use a stable URL: browser storage belongs to an origin, so switching between localhost, your LAN address and a deployed domain creates separate saved sessions.
+Light and dark themes. A responsive layout for desktop and mobile. Your original backup stays untouched.
 
 ## Import → choose → export
 
-1. Export a backup from your old phone's Contacts app or download a VCF/CSV from Google Contacts. Keep the original backup safe.
-2. Choose or drop the backup in Contacts−. An existing list requires confirmation before replacement; invalid imports retain the old list and selections.
-3. Search and filter, then check the people you want to keep. The table checkbox changes only the current page of up to 50 contacts. **Select all matching** applies to the whole filtered result, across pages.
-4. Use **Save progress** before leaving if you want explicit confirmation. Autosave runs after import and selection changes. Return in the same browser profile and at the same URL.
-5. Click **Export selected**, review the preview and warnings, then download the VCF.
-6. On Android, open Contacts and find **Organize**, **Manage contacts** or **Settings → Import from file**, then choose the downloaded VCF. Menu labels vary by phone and app.
+1. **Bring your contacts.** [Try Contacts−](https://contacts-minus.vercel.app/) and choose a backup from your device. Just exploring? Try the fictional sample contacts inside the app.
+2. **Choose your people.** Search, filter and select who you want to keep. Take a break whenever you need; return on the same browser, device and app URL to continue.
+3. **Take them with you.** Choose **Export selected**, review the preview, download your VCF and import it through your phone's Contacts app.
 
-Importing a file does **not** delete old contacts. Importing into an account that already contains them may create duplicates. Review the destination account and retain a backup before managing existing contacts yourself.
+Contacts− never edits or deletes contacts directly on your phone. Keep your original backup. Importing an exported file into an existing contact list can create duplicates; import menus and format support vary by phone.
 
-Try [the fictional VCF](public/sample-contacts.vcf) or [the fictional Google-style CSV](public/sample-contacts.csv). All example names and numbers are invented. The app starts empty; sample contacts appear only when explicitly requested.
+## Your contacts stay yours
 
-## Privacy
+Contact parsing, selection and export happen **on your device**. The app has no contact upload endpoint, account system, analytics, advertising or tracking.
 
-Parsing, filtering, duplicate review and export happen on your device. The app has **no backend, authentication, analytics, advertising, third-party fonts or contact APIs**. It does not send contact contents over the network or put them into logs, URLs or browser history. Imported strings are rendered as text, not HTML.
+Saved progress lives in your current browser. It does not sync between devices, and the app does not encrypt browser storage. Clearing site data or ending a private browsing session can remove your progress. On a shared device, use **Clear uploaded contacts** when you finish.
 
-To support returning later, it saves the imported records, filename, import warnings and selection IDs in **IndexedDB**, under `contacts-minus`, on this browser profile. Save progress does not upload or download anything. Browser storage is not encrypted by this app. Other people who can use your browser profile can open the saved session. Clearing uploaded contacts deletes the saved record; clearing selection retains the imported contacts. Clearing browser site data also removes saved progress.
+[Read the privacy policy →](PRIVACY.md)
 
-Storage can be unavailable or full, particularly in private browsing. Watch the save indicator; if saving fails, export before closing. Saved progress is not a substitute for your original backup. See [PRIVACY.md](PRIVACY.md) for details.
+## Help shape Contacts−
 
-A static hosting provider can receive normal website access metadata. Production security headers are included in `vercel.json` for Vercel and in `_headers` for hosts supporting that file. The application itself does not make contact upload requests.
+Have an idea or found a bug? [Share your feedback](https://github.com/paritoshpky5/Contacts-/issues). If the app helps you, [give the project a star](https://github.com/paritoshpky5/Contacts-) or [buy me a chai](https://www.buymeachai.in/paritoshpky).
 
-## Validation
+Built with React, TypeScript, Vite and Tailwind CSS. Free and open source under the [MIT license](LICENSE). Developers can find contribution guidance in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-```sh
-npm run typecheck
-npm test
-npm run build
-npx playwright install chromium
-npm run test:e2e
-```
+Please use fictional contact data in public reports. Screenshots and [sample files](public/sample-contacts.vcf) in this repository use fictional contacts. See the [security policy](SECURITY.md) to report a security issue.
 
-`npm run check` runs type checking, core tests and production build together. Browser tests run against the production preview, using Chromium desktop and Pixel 7 viewport/touch emulation. They cover real file imports through the worker, filtering, selection, downloaded VCF content, confirmation, invalid replacements, details, refresh recovery, clearing, storage and network requests. They regenerate the screenshot files using fictional data. Pixel emulation is **not a physical Android device test**.
+---
 
-Core tests cover vCard boundaries and versions, folding, Unicode, quoted-printable, multiple phones/emails, original property preservation, Google-style CSV quoting/multiline handling, selection scope, export/re-import and operations over 10,000 contacts.
+Made with ❤️ in India by **[Paritosh](https://github.com/paritoshpky5)**
 
-The initial local validation passed **26 core tests and 8 desktop/mobile browser tests**, including a real 5,000-contact import. Physical Android Contacts import still needs verification on a target device before launch.
-
-## Build and deploy
-
-```sh
-npm ci
-npm run build
-npm run preview
-```
-
-The deployable static site is in `dist/`. Serve it over HTTP(S), not by double-clicking `index.html`, because imports use a module worker.
-
-### Vercel deployment
-
-The included [vercel.json](vercel.json) configures the Vite build, install command, output directory and security headers. `package.json` selects Node 24.x.
-
-1. Push the repository to GitHub.
-2. In Vercel, choose **Add New → Project**, connect GitHub and import the repository.
-3. Confirm the **Vite** framework preset and these build settings, then deploy.
-4. Open the actual `vercel.app` URL Vercel assigns and verify the live app before sharing it.
-
-| Setting           | Value                  |
-| ----------------- | ---------------------- |
-| Production branch | `main`                 |
-| Root directory    | Repository root (`./`) |
-| Framework preset  | `Vite`                 |
-| Install command   | `npm ci --include=dev` |
-| Build command     | `npm run build`        |
-| Output directory  | `dist`                 |
-| Node.js version   | `24.x`                 |
-
-No application secrets, database or backend are required. Keep Vercel Web Analytics and Speed Insights disabled to preserve this project's no-tracking design. `.vercel/` is ignored so local Vercel project metadata is not committed.
-
-After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Vercel URL.
-
-References: [Vercel's Vite guide](https://vercel.com/docs/frameworks/frontend/vite), [project configuration](https://vercel.com/docs/project-configuration/vercel-json), [Node version selection](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions).
-
-### Other static hosts
-
-For Netlify, Cloudflare Pages or similar: use `npm ci && npm run build` as the build command and `dist` as the output directory. No environment variables or server are required. No SPA rewrite is needed because the app uses a single page without client routes. The `public/_headers` file applies protective response headers on compatible hosts.
-
-## Project structure
-
-```text
-src/
-  App.tsx                     Responsive workflow and session UI
-  components/Modal.tsx        Accessible dialog and focus handling
-  features/contacts/
-    logic.ts                  Search, filtering, sorting, selection, duplicates
-    import.worker.ts          Browser-local background parsing
-  lib/
-    vcard/index.ts            VCF parsing, loss-preserving export, folding
-    csv/index.ts              Papa Parse and CSV → vCard mapping
-    session.ts                Serialized IndexedDB saves and clearing
-  types/contact.ts            Shared models
-  tests/contacts.test.ts      Core regression tests
-e2e/                          Production-browser workflow tests
-public/                       Fictional sample files, favicon, host headers
-docs/                         Generated screenshots using fictional contacts
-.github/workflows/            CI validation
-vercel.json                  Vercel build settings and security headers
-.node-version                Node version used for hosted builds
-```
-
-## Format support and limitations
-
-- The vCard parser is a deliberately bounded structural reader, not a complete implementation of every historical extension. Existing VCF records retain original properties, binary data, custom labels and version on export, with CRLF endings. Missing required FN/N fields are added using the display name. Existing VCF line layout is otherwise preserved, including legacy base64 continuation lines.
-- Common 2.1/3.0/4.0 records, UTF-8/UTF-16 files, standard folds, escaping and quoted-printable fields are supported. Legacy files with non-UTF-8 bytes outside quoted-printable, malformed boundaries or unsupported versions are rejected. Export a fresh UTF-8 backup for those files.
-- CSV export generates folded UTF-8 vCard 3.0. Common names, phones, emails, labels, company, title, birthday, notes, websites, groups and formatted addresses are mapped. Other populated columns become `X-CONTACTS-CSV-*` extension properties; a phone app may not display them. Separate address component columns are preserved as extensions, not combined into a structured postal address. Date strings are retained as supplied.
-- Duplicate review uses normalized phone digits, case-insensitive emails and exact normalized names. It does not infer country codes or aggressively fuzzy-match names. Same-name people may be unrelated.
-- Contact details hide embedded photos and binary properties, which remain in VCF exports.
-- Imports are capped at 50 MB. Rendering uses 50-row pages and parsing uses a worker. Automated logic checks exercise 10,000 contacts; practical speed depends on device and embedded photos.
-- Progress stays on one browser/device/origin, does not sync, and is not encrypted by the application. Multiple tabs can overwrite the same saved session; use one working tab. Browser clearing or eviction can remove data. Undo is limited to one selection operation and is not restored after refresh.
-- Android import instructions and generated VCF output are provided; compatibility still depends on the target Contacts app. Physical Android import has not been verified in this development environment.
-
-## Contributing
-
-[CONTRIBUTING.md](CONTRIBUTING.md) explains how to contribute safely with fictional test data.
-
-MIT licensed. Built by [paritoshpky5](https://github.com/paritoshpky5).
+[![GitHub](docs/readme/github.svg)](https://github.com/paritoshpky5 'GitHub') [![LinkedIn](docs/readme/linkedin.svg)](https://www.linkedin.com/in/paritoshpky/ 'LinkedIn') [![Buy me a chai](docs/readme/chai.svg)](https://www.buymeachai.in/paritoshpky 'Buy me a chai')

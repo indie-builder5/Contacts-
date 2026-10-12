@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Contacts− — Less clutter. More connection.</title>
+  <desc id="desc">A private contact manager for a fresh start. From 1,000 saved contacts to the people you want to keep.</desc>
+  <rect width="1200" height="360" rx="22" fill="#f3f6ef"/>
+  <circle cx="1120" cy="10" r="260" fill="#e8efe3"/>
+  <circle cx="1190" cy="360" r="210" fill="#dce9d9" opacity=".6"/>
+  <rect x="56" y="42" width="42" height="42" rx="12" fill="#16684e"/>
+  <g fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="75" cy="57" r="4"/>
+    <path d="M67 72v-3a8 8 0 0 1 16 0v3M85 54h6"/>
+  </g>
+  <text x="110" y="72" fill="#243c32" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700" letter-spacing="-1">Contacts−</text>
+  <text x="56" y="160" fill="#243c32" font-family="Georgia,serif" font-size="54" letter-spacing="-1.5">Less clutter.</text>
+  <text x="56" y="220" fill="#16684e" font-family="Georgia,serif" font-size="54" font-style="italic" letter-spacing="-1.5">More connection.</text>
+  <text x="58" y="262" fill="#607167" font-family="Segoe UI,Arial,sans-serif" font-size="18">A new phone. A fresh start. Bring only your people along.</text>
+  <g font-family="Segoe UI,Arial,sans-serif" font-size="13" fill="#16684e">
+    <rect x="56" y="292" width="152" height="30" rx="15" fill="#e3ece0"/>
+    <text x="73" y="312">Private by design</text>
+    <rect x="218" y="292" width="124" height="30" rx="15" fill="#e3ece0"/>
+    <text x="236" y="312">No account</text>
+    <rect x="352" y="292" width="157" height="30" rx="15" fill="#e3ece0"/>
+    <text x="370" y="312">Free &amp; open source</text>
+  </g>
+  <rect x="784" y="51" width="319" height="233" rx="20" fill="#fff" stroke="#d6e2d2" transform="rotate(6 943 168)"/>
+  <rect x="765" y="68" width="319" height="233" rx="20" fill="#fff" stroke="#d6e2d2" transform="rotate(-5 924 185)"/>
+  <rect x="780" y="75" width="308" height="229" rx="20" fill="#fff" stroke="#d6e2d2"/>
+  <text x="806" y="107" fill="#758378" font-family="Segoe UI,Arial,sans-serif" font-size="11" font-weight="600" letter-spacing="1.6">YOUR NEXT CHAPTER</text>
+  <text x="806" y="163" fill="#243c32" font-family="Segoe UI,Arial,sans-serif" font-size="42" font-weight="600" letter-spacing="-1">1,000+</text>
+  <text x="806" y="188" fill="#758378" font-family="Segoe UI,Arial,sans-serif" font-size="14">saved contacts</text>
+  <path d="M810 212h244" stroke="#e5ebe2"/>
+  <rect x="806" y="233" width="30" height="30" rx="9" fill="#16684e"/>
+  <path d="m814 248 5 5 10-12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="848" y="250" fill="#16684e" font-family="Segoe UI,Arial,sans-serif" font-size="19" font-weight="600">Your people.</text>
+  <text x="848" y="273" fill="#758378" font-family="Segoe UI,Arial,sans-serif" font-size="13">You decide who stays.</text>
+</svg>

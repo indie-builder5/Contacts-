@@ -26,7 +26,7 @@ export function SocialLinks() {
         </svg>
       </a>
       <a
-        href="https://buymeachai.in/paritoshpky555"
+        href="https://www.buymeachai.in/paritoshpky"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Buy me a chai"
