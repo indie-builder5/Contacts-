@@ -7,3 +7,10 @@ test-results/
 !.env.example
 *.local
 .DS_Store
+/docs/LAUNCH.md
+/docs/VERIFICATION.md
+/personal/
+*.bundle
+.vercel/
+.idea/
+*.iml

@@ -1,6 +1,6 @@
 # Contributing
 
-Use Node 22.12+ and `npm ci`. Run `npm run dev` for development and `npm run check` before submitting changes. For workflow changes, also run `npx playwright install chromium` and `npm run test:e2e`.
+Use Node 24 LTS and `npm ci`. Run `npm run dev` for development and `npm run check` before submitting changes. For workflow changes, also run `npx playwright install chromium` and `npm run test:e2e`.
 
 Use fictional fixtures only. Never commit real contact backups, contact screenshots, exports, saved session dumps or logs with names, phone numbers or email addresses. Tests and screenshot generation use the included fictional samples.
 

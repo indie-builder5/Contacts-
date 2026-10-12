@@ -24,7 +24,7 @@ Contacts− is that small, intentional tool. **You decide who stays.** It never 
 
 ## Run locally
 
-Use Node.js **22.12+** (Node 24 LTS recommended) and npm.
+Use Node.js **24 LTS** and npm. `.node-version` records the version used for local validation; `package.json` selects Node 24.x for hosted builds.
 
 ```sh
 git clone https://github.com/paritoshpky5/Contacts-.git
@@ -64,7 +64,7 @@ To support returning later, it saves the imported records, filename, import warn
 
 Storage can be unavailable or full, particularly in private browsing. Watch the save indicator; if saving fails, export before closing. Saved progress is not a substitute for your original backup. See [PRIVACY.md](PRIVACY.md) for details.
 
-A static hosting provider can receive normal website access metadata. Production security headers are included in `render.yaml` for Render and in `_headers` for hosts supporting that file. GitHub Pages does not apply `_headers`. The application itself does not make contact upload requests.
+A static hosting provider can receive normal website access metadata. Production security headers are included in `vercel.json` for Vercel and in `_headers` for hosts supporting that file. The application itself does not make contact upload requests.
 
 ## Validation
 
@@ -80,7 +80,7 @@ npm run test:e2e
 
 Core tests cover vCard boundaries and versions, folding, Unicode, quoted-printable, multiple phones/emails, original property preservation, Google-style CSV quoting/multiline handling, selection scope, export/re-import and operations over 10,000 contacts.
 
-The initial local validation passed **26 core tests and 8 desktop/mobile browser tests**, including a real 5,000-contact import. See [the verification record](docs/VERIFICATION.md) for evidence and the remaining physical-device check.
+The initial local validation passed **26 core tests and 8 desktop/mobile browser tests**, including a real 5,000-contact import. Physical Android Contacts import still needs verification on a target device before launch.
 
 ## Build and deploy
 
@@ -90,7 +90,7 @@ npm run build
 npm run preview
 ```
 
-The deployable static site is in `dist/`. Serve it over HTTP(S), not by double-clicking `index.html`, because imports use a module worker. Vite's relative asset base supports GitHub Pages project URLs.
+The deployable static site is in `dist/`. Serve it over HTTP(S), not by double-clicking `index.html`, because imports use a module worker.
 
 ### Publish the source to GitHub
 
@@ -105,33 +105,30 @@ git push -u origin main
 
 If you already have an `origin`, use `git remote set-url origin ...` instead. No remote repository or public deployment is created by the local build.
 
-### Render (preferred deployment)
+### Vercel deployment
 
-Deploy this project as a **Static Site** on Render. The included [render.yaml](render.yaml) provides the build settings and security headers; `.node-version` pins the build to the locally tested Node 24.14.0.
+The included [vercel.json](vercel.json) configures the Vite build, install command, output directory and security headers. `package.json` selects Node 24.x.
 
 1. Push the repository to GitHub.
-2. In Render, choose **New → Blueprint**, connect your repository and use `render.yaml` from `main`.
-3. Review and create the `contacts-minus` static site. It builds with `npm ci --include=dev && npm run build` and publishes `dist/`.
-4. Open the actual `onrender.com` URL Render assigns after deployment. Use that URL in your LinkedIn and Product Hunt copy.
+2. In Vercel, choose **Add New → Project**, connect GitHub and import the repository.
+3. Confirm the **Vite** framework preset and these build settings, then deploy.
+4. Open the actual `vercel.app` URL Vercel assigns and verify the live app before sharing it.
 
-Alternatively, choose **New → Static Site** and enter these values manually:
+| Setting           | Value                  |
+| ----------------- | ---------------------- |
+| Production branch | `main`                 |
+| Root directory    | Repository root (`./`) |
+| Framework preset  | `Vite`                 |
+| Install command   | `npm ci --include=dev` |
+| Build command     | `npm run build`        |
+| Output directory  | `dist`                 |
+| Node.js version   | `24.x`                 |
 
-| Setting           | Value                                   |
-| ----------------- | --------------------------------------- |
-| Branch            | `main`                                  |
-| Root directory    | Leave blank                             |
-| Build command     | `npm ci --include=dev && npm run build` |
-| Publish directory | `dist`                                  |
+No application secrets, database or backend are required. Keep Vercel Web Analytics and Speed Insights disabled to preserve this project's no-tracking design. `.vercel/` is ignored so local Vercel project metadata is not committed.
 
-Manual creation does not apply Blueprint headers automatically; copy the header rules from `render.yaml` into Render's Headers settings. No application secrets, database, start command or rewrite are needed. The Blueprint waits for linked-branch CI checks to pass before automatic redeploys. Keep the included Validate workflow enabled, or change Render's auto-deploy setting to On Commit or Off if desired.
+After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Vercel URL. The deployment configuration is prepared here; no Vercel project or deployment has been created from this workspace.
 
-After deployment, test import, selection, saving, refresh and VCF download on the live origin. Locally saved progress stays scoped to localhost; it does not move to your Render URL. Render setup is prepared here, but no Render service has been created or deployment performed.
-
-References: [Render static sites](https://render.com/docs/static-sites), [Blueprint fields](https://render.com/docs/blueprint-spec), [Node version selection](https://render.com/docs/node-version).
-
-### GitHub Pages (optional alternative)
-
-In **Settings → Pages → Build and deployment**, select **GitHub Actions**. Run the included **Deploy GitHub Pages** workflow manually from the Actions tab. It validates, builds, uploads `dist/` and deploys the site. Subsequent deployment is manual so ordinary source pushes don't unexpectedly publish changes. The anticipated project URL is `https://paritoshpky5.github.io/Contacts-/`; use it in launch copy only after a successful deployment.
+References: [Vercel's Vite guide](https://vercel.com/docs/frameworks/frontend/vite), [project configuration](https://vercel.com/docs/project-configuration/vercel-json), [Node version selection](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions).
 
 ### Other static hosts
 
@@ -154,9 +151,9 @@ src/
   tests/contacts.test.ts      Core regression tests
 e2e/                          Production-browser workflow tests
 public/                       Fictional sample files, favicon, host headers
-docs/                         Launch copy and generated screenshots
-.github/workflows/            CI and manual GitHub Pages deployment
-render.yaml                  Render Static Site Blueprint and security headers
+docs/                         Generated screenshots using fictional contacts
+.github/workflows/            CI validation
+vercel.json                  Vercel build settings and security headers
 .node-version                Node version used for hosted builds
 ```
 
@@ -171,8 +168,8 @@ render.yaml                  Render Static Site Blueprint and security headers
 - Progress stays on one browser/device/origin, does not sync, and is not encrypted by the application. Multiple tabs can overwrite the same saved session; use one working tab. Browser clearing or eviction can remove data. Undo is limited to one selection operation and is not restored after refresh.
 - Android import instructions and generated VCF output are provided; compatibility still depends on the target Contacts app. Physical Android import has not been verified in this development environment.
 
-## Share the project
+## Contributing
 
-[Launch copy](docs/LAUNCH.md) includes LinkedIn and Product Hunt drafts, a maker comment and a practical launch checklist. Replace the live URL placeholder once your deployment is online. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to contribute safely with fictional test data.
+[CONTRIBUTING.md](CONTRIBUTING.md) explains how to contribute safely with fictional test data.
 
 MIT licensed. Built by [paritoshpky5](https://github.com/paritoshpky5).
