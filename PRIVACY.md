@@ -12,6 +12,10 @@ Storage is scoped to your current site URL origin and browser profile. It does n
 
 If browser storage is unavailable, full or removed by the browser, restoration may fail. The app shows save errors and keeps the current in-memory workflow available. Retain the original backup and export your selection before closing if saving fails. Private browsing commonly clears data when its session ends.
 
+## Theme preference
+
+Your selected light or dark theme is saved in localStorage under `contacts-minus-theme` so it survives refreshes and future visits in the same browser. This entry contains only `light` or `dark`, with no contact data. Clearing uploaded contacts keeps this display preference; clearing the site's browser data removes it. If preference storage is blocked, theme switching still works for the current tab.
+
 ## Hosting and exports
 
 Your hosting provider receives ordinary website requests and may retain access metadata such as IP addresses and browser headers under its own policies. These requests do not contain your imported contacts. This repository does not include third-party scripts or hosted font requests.

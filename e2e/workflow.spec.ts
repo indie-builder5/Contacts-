@@ -61,8 +61,12 @@ test('import, search, filter, select, export, replace confirmation and reset sta
     await page.evaluate(() => window.innerWidth),
   );
   expect(
-    await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length })),
-  ).toEqual({ local: 0, session: 0 });
+    await page.evaluate(() => ({
+      local: localStorage.length,
+      theme: localStorage.getItem('contacts-minus-theme'),
+      session: sessionStorage.length,
+    })),
+  ).toEqual({ local: 1, theme: 'light', session: 0 });
   await page.getByLabel('Clear uploaded contacts').first().click();
   await page
     .getByRole('dialog')
@@ -70,6 +74,48 @@ test('import, search, filter, select, export, replace confirmation and reset sta
     .click();
   await expect(page.getByText('A lighter contact list starts here.')).toBeVisible();
   expect(unexpected).toEqual([]);
+});
+
+test('dark and light preferences survive refresh and reopening the app', async ({
+  page,
+  context,
+}) => {
+  await page.goto('/');
+  await expect(page.locator('.app')).not.toHaveClass(/\bdark\b/);
+  await page.getByLabel('Switch to dark mode').click();
+  await expect(page.locator('.app')).toHaveClass(/\bdark\b/);
+  await page.reload();
+  await expect(page.locator('.app')).toHaveClass(/\bdark\b/);
+  await expect(page.getByLabel('Switch to light mode')).toBeVisible();
+
+  const reopened = await context.newPage();
+  await reopened.goto('/');
+  await expect(reopened.locator('.app')).toHaveClass(/\bdark\b/);
+  await reopened.getByLabel('Switch to light mode').click();
+  await reopened.reload();
+  await expect(reopened.locator('.app')).not.toHaveClass(/\bdark\b/);
+  await expect(reopened.getByLabel('Switch to dark mode')).toBeVisible();
+  await reopened.close();
+});
+
+test('theme switching stays usable when browser preference storage is blocked', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', {
+      get() {
+        throw new DOMException('Storage is blocked', 'SecurityError');
+      },
+    });
+  });
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await page.getByLabel('Switch to dark mode').click();
+  await expect(page.locator('.app')).toHaveClass(/\bdark\b/);
+  await page.getByLabel('Switch to light mode').click();
+  await expect(page.locator('.app')).not.toHaveClass(/\bdark\b/);
+  expect(errors).toEqual([]);
 });
 test('CSV replacement, detail review and keyboard accessible dialogs', async ({ page }) => {
   await page.goto('/');

@@ -63,7 +63,13 @@ export default function App() {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [loading, setLoading] = useState(false);
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => {
+    try {
+      return localStorage.getItem('contacts-minus-theme') === 'dark';
+    } catch {
+      return false;
+    }
+  });
   const [drag, setDrag] = useState(false);
   const [modal, setModal] = useState<'help' | 'export' | 'replace' | 'reset' | null>(null);
   const [detail, setDetail] = useState<Contact | null>(null);
@@ -77,6 +83,15 @@ export default function App() {
   const [saveStatus, setSaveStatus] = useState('');
   const [saveBusy, setSaveBusy] = useState(false);
   const saveRevision = useRef(0);
+  function toggleTheme() {
+    const nextDark = !dark;
+    setDark(nextDark);
+    try {
+      localStorage.setItem('contacts-minus-theme', nextDark ? 'dark' : 'light');
+    } catch {
+      // Theme switching still works for this tab when browser storage is blocked.
+    }
+  }
   useEffect(() => {
     let active = true;
     loadSession()
@@ -335,7 +350,7 @@ export default function App() {
           <button
             className="icon-button"
             aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-            onClick={() => setDark(!dark)}
+            onClick={toggleTheme}
           >
             {dark ? <Sun size={19} /> : <Moon size={19} />}
           </button>
